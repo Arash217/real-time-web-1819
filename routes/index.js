@@ -8,21 +8,42 @@ router.get('/register', async ctx => {
     await ctx.render('register')
 });
 
-router.post('/users', async ctx => {
+router.post('/register', async ctx => {
+    const {body} = ctx.request;
     try {
-        const {body} = ctx.request;
         await userValidator.validate(body);
         const user = new User(body);
         await user.save();
-        ctx.status = 201;
-        ctx.body = user;
+        return passport.authenticate('local', (err, user) => {
+            ctx.login(user);
+            ctx.redirect('/dashboard');
+        })(ctx);
     } catch (e) {
         ctx.status = 400;
-        ctx.body = e;
+        await ctx.render('register', {
+            body,
+            e
+        })
     }
 });
 
-router.get('/login', ctx => {
+router.get('/login', async ctx => {
+    await ctx.render('login')
+});
+
+router.post('/login', async ctx => {
+    return passport.authenticate('local', (err, user) => {
+        if (user) {
+            ctx.login(user);
+            return ctx.redirect('/dashboard');
+        } else {
+            ctx.status = 400;
+            ctx.body = { status: 'error' };
+        }
+    })(ctx);
+});
+
+router.get('/dashboard', ctx => {
     ctx.body = 'lol2';
 });
 

@@ -23,12 +23,16 @@ app.use(bodyParser());
 
 app.use(serve(__dirname + '/public'));
 
+hbs.registerHelper('equals', (val1, val2) => {
+    return val1 === val2;
+});
+
 app.use(hbs.middleware({
     viewPath: path.join(__dirname, '/views'),
     partialsPath: path.join(__dirname, 'views/partials')
 }));
 
-app.use(middlewares);
+// app.use(middlewares);
 app.use(router.routes());
 app.use(router.allowedMethods());
 

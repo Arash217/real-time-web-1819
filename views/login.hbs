@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register</title>
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1d3e53"/>
     <meta name="Description" content="An overview of all countries">
@@ -9,31 +9,28 @@
 </head>
 <body>
 <main>
-    <form action="/register" method="post">
+    <form action="/login" method="post">
         <div class="container">
-            <h1>Register</h1>
+            <h1>Login</h1>
             <hr>
 
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required value="{{body.username}}">
 
-            {{#if (equals e.path 'username')}}
-                <p>{{e.message}}</p>
-            {{/if}}
-
             <label for="password"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required value="{{body.password}}">
 
-            {{#if (equals e.path 'password')}}
+            <hr>
+
+            {{#if e.message}}
                 <p>{{e.message}}</p>
             {{/if}}
 
-            <hr>
-            <button type="submit" class="registerbtn">Register</button>
+            <button type="submit" class="registerbtn">Login</button>
         </div>
 
         <div class="container signin">
-            <p>Already have an account? <a href="/login">Sign in</a>.</p>
+            <p>Don't have an account? <a href="/register">Sign in</a>.</p>
         </div>
     </form>
 </main>

@@ -20,7 +20,9 @@ const comparePass = (userPassword, databasePassword) => {
 
 passport.use(new LocalStrategy(async (username, password, done) => {
     try {
-        const user = await User.findOne({username});
+        console.log(username, 'in passport');
+        const user = await User.findOne({username}).exec();
+        console.log(user, 'in passport');
         if (!user) return done(null, false);
         if (!comparePass(password, user.password)) return done(null, false);
         done(null, user);
