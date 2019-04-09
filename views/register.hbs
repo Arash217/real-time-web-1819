@@ -17,15 +17,15 @@
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required value="{{body.username}}">
 
-            {{#if (equals e.path 'username')}}
-                <p>{{e.message}}</p>
+            {{#if (equals error.path 'username')}}
+                <p>{{error.message}}</p>
             {{/if}}
 
             <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required value="{{body.password}}">
+            <input type="password" placeholder="Enter Password" name="password" required>
 
-            {{#if (equals e.path 'password')}}
-                <p>{{e.message}}</p>
+            {{#if (equals error.path 'password')}}
+                <p>{{error.message}}</p>
             {{/if}}
 
             <hr>

@@ -18,13 +18,15 @@ const comparePass = (userPassword, databasePassword) => {
     return bcrypt.compareSync(userPassword, databasePassword);
 };
 
+const invalidCredentialsError = {
+    message: 'Incorrect username and/or password'
+};
+
 passport.use(new LocalStrategy(async (username, password, done) => {
     try {
-        console.log(username, 'in passport');
-        const user = await User.findOne({username}).exec();
-        console.log(user, 'in passport');
-        if (!user) return done(null, false);
-        if (!comparePass(password, user.password)) return done(null, false);
+        const user = await User.findOne({username});
+        if (!user) return done(invalidCredentialsError, false);
+        if (!comparePass(password, user.password)) return done(invalidCredentialsError, false);
         done(null, user);
     } catch (e) {
         done(e)
