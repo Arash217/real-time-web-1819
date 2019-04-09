@@ -8,28 +8,26 @@ const path = require('path');
 
 require('./db/mongoose');
 const router = require('./routes');
-const middlewares = require('./middlewares');
+// const middlewares = require('./middlewares');
+require('./auth');
 
-app = new Koa();
+const app = new Koa();
 
 app.keys = ['secret'];
 app.use(session({}, app));
 
-require('./auth');
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser());
 
-app.use(serve(__dirname + '/public'));
+app.use(serve(path.join(__dirname, '/public')));
 
-hbs.registerHelper('equals', (val1, val2) => {
-    return val1 === val2;
-});
+hbs.registerHelper('equals', (val1, val2) => val1 === val2);
 
 app.use(hbs.middleware({
     viewPath: path.join(__dirname, '/views'),
-    partialsPath: path.join(__dirname, 'views/partials')
+    partialsPath: path.join(__dirname, 'views/partials'),
 }));
 
 // app.use(middlewares);

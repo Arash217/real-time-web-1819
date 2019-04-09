@@ -6,7 +6,7 @@ const errorHandling = async (ctx, next) => {
         await next();
         if (ctx.status === 404) {
             await ctx.render('error', {
-                errorMessage: 'Page not found'
+                errorMessage: 'Page not found',
             });
         }
     } catch (e) {
@@ -26,5 +26,5 @@ const errorHandling = async (ctx, next) => {
 };
 
 module.exports = compose([
-    errorHandling
+    errorHandling,
 ]);
