@@ -1,5 +1,5 @@
 {
-  "name": "koa-backend-test",
+  "name": "real-time-web-1819",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arash217/koa-backend-test.git"
+    "url": "git+https://github.com/Arash217/real-time-web-1819.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Arash217/koa-backend-test/issues"
+    "url": "https://github.com/Arash217/real-time-web-1819/issues"
   },
-  "homepage": "https://github.com/Arash217/koa-backend-test#readme"
+  "homepage": "https://github.com/Arash217/real-time-web-1819#readme"
 }
