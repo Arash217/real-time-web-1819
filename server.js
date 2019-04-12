@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Koa = require('koa');
 const hbs = require('koa-hbs');
 const bodyParser = require('koa-bodyparser');
