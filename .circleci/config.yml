@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:11
+    branches:
+      only:
+        - master
+    steps:
+      - run: ssh -o "StrictHostKeyChecking no" root@134.209.92.164 "cd ~/real-time-web-1819; git pull; npm install; pm2 reload Real-time-web-1819"
