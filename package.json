@@ -26,7 +26,8 @@
   },
   "scripts": {
     "dev": "nodemon server.js -e hbs,css,js",
-    "lint:watch": "esw ."
+    "lint:watch": "esw .",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
