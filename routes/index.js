@@ -3,6 +3,7 @@ const controllers = require('../controllers');
 
 const router = new Router();
 
+router.get('/', controllers.homePage);
 router.get('/register', controllers.registerPage);
 router.post('/register', controllers.registerUser);
 router.get('/login', controllers.loginPage);
