@@ -51,15 +51,7 @@ const clients = [];
 const socketHandler = client => {
     clients.push(client);
 
-    client.on('disconnect', () => {
-        clients.splice(clients.indexOf(client), 1);
-    });
-
-    client.on('filter', data => {
-        client.filterQuery = data;
-    });
-
-    redditStream.addEventListener('rc', e => {
+    const eventHandler = e => {
         const comment = JSON.parse(e.data);
 
         if (client.filterQuery){
@@ -68,6 +60,17 @@ const socketHandler = client => {
                 client.emit('comment', getCommentNode(comment));
             }
         }
+    };
+
+    redditStream.addEventListener('rc', eventHandler);
+
+    client.on('disconnect', () => {
+        clients.splice(clients.indexOf(client), 1);
+        redditStream.removeEventListener('rc', eventHandler);
+    });
+
+    client.on('filter', data => {
+        client.filterQuery = data;
     });
 };
 
