@@ -2,8 +2,8 @@
     --blue: 82, 150, 221;
     --lightblue: 146, 189, 223;
     --white: 255, 255, 255;
-    --grey: 215,215,215;
-    --red: 255,99,20;
+    --grey: 215, 215, 215;
+    --red: 255, 99, 20;
 }
 
 * {
@@ -55,10 +55,29 @@ nav {
     padding: 0px 16px 0px 16px;
 }
 
-.search-input:hover{
+.search-input:hover {
     background-color: rgb(255, 255, 255);
     border-width: 1px;
     border-style: solid;
     border-color: rgb(0, 121, 211);
     border-image: initial;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 60% auto;
+}
+
+#comments {
+    max-height: 800px;
+    overflow-y: scroll;
+    word-break: break-all;
+}
+
+.comment {
+    padding: 1em;
+}
+
+.stats-container {
+    background-color: aqua;
 }
