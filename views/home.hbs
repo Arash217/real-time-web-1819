@@ -9,10 +9,12 @@
 </head>
 <body>
 <main>
-    <form id="filter-form">
-        <input type="text" name="filter" id="filter">
-        <input type="submit">
-    </form>
+    <nav>
+        <form id="filter-form">
+            <input type="text" name="filter" id="filter" class="search-input" placeholder="Search comments" autocomplete="off">
+        </form>
+        <a href="/login" class="login-btn">Login</a>
+    </nav>
     <div id="comments"></div>
 </main>
 <script src="/socket.io/socket.io.js"></script>

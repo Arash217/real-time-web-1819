@@ -1,61 +1,64 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
+:root {
+    --blue: 82, 150, 221;
+    --lightblue: 146, 189, 223;
+    --white: 255, 255, 255;
+    --grey: 215,215,215;
+    --red: 255,99,20;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Add padding to containers */
-.container {
-    padding: 16px;
-    background-color: white;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(var(--grey));
 }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
+nav {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(var(--white));
+    padding: 0.6em 0.5em;
+    grid-template-columns: 50% auto;
+    grid-column-gap: 1em;
 }
 
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-}
-
-/* Overwrite default styles of hr */
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-}
-
-/* Set a style for the submit button */
-.registerbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-}
-
-.registerbtn:hover {
-    opacity: 1;
-}
-
-/* Add a blue text color to links */
-a {
-    color: dodgerblue;
-}
-
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-    background-color: #f1f1f1;
+.login-btn {
     text-align: center;
+    background-color: transparent;
+    color: rgb(0, 121, 211);
+    fill: rgb(0, 121, 211);
+    border-width: 1px;
+    border-style: solid;
+    border-image: initial;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 3px 16px;
+    border-color: rgb(0, 121, 211);
+}
+
+.search-input {
+    background-color: rgb(246, 247, 248);
+    color: rgb(28, 28, 28);
+    display: block;
+    height: 36px;
+    width: 100%;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(237, 239, 241);
+    border-image: initial;
+    padding: 0px 16px 0px 16px;
+}
+
+.search-input:hover{
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 121, 211);
+    border-image: initial;
 }
