@@ -56,10 +56,13 @@ const socketHandler = client => {
 
         if (client.filterQuery){
             if (comment.body && comment.body.includes(client.filterQuery)){
-                console.log(clients.length);
+                // console.log(comment);
+                // console.log(clients.length);
                 client.emit('comment', {
                     commentNode: getCommentNode(comment),
-                    data: comment
+                    commentData: {
+                        subreddit: comment.subreddit_name_prefixed
+                    }
                 });
             }
         }

@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#1d3e53"/>
     <meta name="Description" content="An overview of all countries">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/chart.min.css">
 </head>
 <body>
 <main>
@@ -18,10 +19,12 @@
     <section class="main-container">
         <section id="comments"></section>
         <section class="stats-container">
+            <canvas id="pie-chart"></canvas>
         </section>
     </section>
 </main>
 <script src="/socket.io/socket.io.js"></script>
+<script src="/js/chart.bundle.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>
