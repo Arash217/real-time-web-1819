@@ -66,10 +66,12 @@ nav {
 .main-container {
     display: grid;
     grid-template-columns: 60% auto;
+    margin: 1em;
 }
 
 #comments {
     max-height: 800px;
+    background-color: rgb(var(--white));
     overflow-y: scroll;
     word-break: break-all;
 }

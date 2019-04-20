@@ -57,7 +57,10 @@ const socketHandler = client => {
         if (client.filterQuery){
             if (comment.body && comment.body.includes(client.filterQuery)){
                 console.log(clients.length);
-                client.emit('comment', getCommentNode(comment));
+                client.emit('comment', {
+                    commentNode: getCommentNode(comment),
+                    data: comment
+                });
             }
         }
     };
