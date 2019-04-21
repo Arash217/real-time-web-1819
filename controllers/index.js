@@ -3,6 +3,7 @@ const User = require('../models/user');
 const userValidator = require('../services/validation/user');
 const redditStream = require('../services/reddit/stream');
 const { getCommentNode } = require('../services/views/index');
+const CommentCounter = require('../services/charts/comment-counter');
 
 const homePage = async ctx => ctx.render('home');
 
@@ -51,6 +52,8 @@ const clients = [];
 const socketHandler = client => {
     clients.push(client);
 
+    const commentCounter = new CommentCounter(client);
+
     const eventHandler = e => {
         const comment = JSON.parse(e.data);
 
@@ -58,6 +61,7 @@ const socketHandler = client => {
             if (comment.body && comment.body.includes(client.filterQuery)){
                 // console.log(comment);
                 // console.log(clients.length);
+                commentCounter.increment();
                 client.emit('comment', {
                     commentNode: getCommentNode(comment),
                     commentData: {
@@ -73,6 +77,8 @@ const socketHandler = client => {
     client.on('disconnect', () => {
         clients.splice(clients.indexOf(client), 1);
         redditStream.removeEventListener('rc', eventHandler);
+        commentCounter.clear();
+        delete(commentCounter);
     });
 
     client.on('filter', data => {

@@ -2,10 +2,32 @@ const socket = io();
 
 const filterForm = document.getElementById('filter-form');
 const comments = document.getElementById('comments');
-const ctx = document.getElementById('pie-chart');
+const lineCtx = document.getElementById('line-chart');
+const pieCtx = document.getElementById('pie-chart');
 
-const pieChart = new Chart(ctx, {
-    type: 'pie'
+const lineChart = new Chart(lineCtx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: []
+        }],
+    },
+    options: {
+        elements: {
+            line: {
+                tension: 0
+            }
+        }
+    }
+});
+
+const pieChart = new Chart(pieCtx, {
+    type: 'horizontalBar',
+    data: {
+        datasets: [{
+            data: []
+        }],
+    }
 });
 
 
@@ -27,36 +49,36 @@ const inputEventHandler = e => {
 
 filterForm.addEventListener('input', debounce(inputEventHandler, 300));
 
-const pieData = {
-    subreddits: [],
-    subredditAmount: [],
-
-    addData(subreddit) {
-        const index = this.subreddits.indexOf(subreddit);
-
-        if (index === -1){
-            this.subreddits.push(subreddit);
-            this.subredditAmount.push(1);
-            return;
-        }
-
-        this.subredditAmount[index]++;
-    },
-};
-
 const updatePieChart = subreddit => {
-    pieData.addData(subreddit);
+    const { labels, datasets } = pieChart.data;
+    const index = labels.indexOf(subreddit);
 
-    pieChart.data.labels = chartData.pie.subs;
-    pieChart.data.datasets = [{data: chartData.pie.commentSubsAmount}];
+    if (index === -1) {
+        labels.push(subreddit);
+        datasets[0].data.push(1);
+    } else {
+        datasets[0].data[index]++;
+    }
+
     pieChart.update();
-};
-
-const updateChartsData = commentData => {
-    updatePieChart(commentData.subreddit);
 };
 
 socket.on('comment', comment => {
     comments.insertAdjacentHTML('afterbegin', comment.commentNode);
-    updateChartsData(comment.commentData);
+    updatePieChart(comment.commentData.subreddit);
+});
+
+const updateLineChart = ({commentPerMinute, currentTime}) => {
+    const { datasets } = lineChart.data;
+
+    datasets[0].data.push({
+        x: currentTime,
+        y: commentPerMinute,
+    });
+
+    lineChart.update();
+};
+
+socket.on('commentCounter', data => {
+    updateLineChart(data);
 });
