@@ -9,7 +9,8 @@ const lineChart = new Chart(lineCtx, {
     type: 'line',
     data: {
         datasets: [{
-            data: []
+            data: [],
+            label: "Comments per minute",
         }],
     },
     options: {
@@ -68,13 +69,16 @@ socket.on('comment', comment => {
     updatePieChart(comment.commentData.subreddit);
 });
 
-const updateLineChart = ({commentPerMinute, currentTime}) => {
+const updateLineChart = ({commentPerMinute, timeElapsed}) => {
     const { datasets } = lineChart.data;
 
-    datasets[0].data.push({
-        x: currentTime,
-        y: commentPerMinute,
-    });
+    if (datasets[0].data.length >= 30){
+        lineChart.data.labels.shift();
+        datasets[0].data.shift();
+    }
+
+    lineChart.data.labels.push(timeElapsed);
+    datasets[0].data.push(commentPerMinute);
 
     lineChart.update();
 };

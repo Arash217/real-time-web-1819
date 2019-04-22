@@ -13,11 +13,11 @@ class CommentCounter {
     }
 
     getData() {
-        const currentTime = Date.now();
-        const commentPerMinute = (this.count / (currentTime - this.startTime)) * 1000 * 60;
+        const timeElapsed = Date.now() - this.startTime;
+        const commentPerMinute = (this.count / timeElapsed) * 1000 * 60;
         return {
-            commentPerMinute,
-            currentTime
+            commentPerMinute: CommentCounter.round(commentPerMinute, 1),
+            timeElapsed: Math.round(timeElapsed / 1000),
         }
     }
 
@@ -29,6 +29,11 @@ class CommentCounter {
 
     clear() {
         clearInterval(this.interval);
+    }
+
+    static round(number, precision) {
+        precision = precision || 0;
+        return parseFloat(parseFloat(number).toFixed(precision));
     }
 }
 
