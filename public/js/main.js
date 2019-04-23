@@ -68,6 +68,14 @@ const updatePieChart = subreddit => {
 };
 
 socket.on('comment', comment => {
+    const { childNodes } = comments;
+    const childNodesLength = childNodes.length;
+
+    if (childNodesLength >= 25) {
+        const lastCommentNode = childNodes[childNodesLength - 1];
+        comments.removeChild(lastCommentNode);
+    }
+
     comments.insertAdjacentHTML('afterbegin', comment.commentNode);
     updatePieChart(comment.commentData.subreddit);
 });
