@@ -11,6 +11,8 @@ const lineChart = new Chart(lineCtx, {
         datasets: [{
             data: [],
             label: "Comments per minute",
+            borderColor: 'rgba(82, 150, 221, 0.5)',
+            backgroundColor: 'rgba(82, 150, 221, 0.5)',
         }],
     },
     options: {
@@ -18,12 +20,17 @@ const lineChart = new Chart(lineCtx, {
             line: {
                 tension: 0
             }
-        }
+        },
+        responsive: true,
     }
 });
 
 const pieChart = new Chart(pieCtx, {
     type: 'horizontalBar',
+    options: {
+        maintainAspectRatio: false,
+        responsive: true,
+    },
     data: {
         datasets: [{
             data: []
@@ -31,24 +38,20 @@ const pieChart = new Chart(pieCtx, {
     }
 });
 
-
-const debounce = (fn, wait) => {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            fn.apply(this, args);
-        }, wait);
-    };
+const removeChildNodes = parent => {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 };
 
 const inputEventHandler = e => {
     e.preventDefault();
+    removeChildNodes(comments);
     const filterFormData = new FormData(filterForm);
     socket.emit('filter', filterFormData.get('filter'));
 };
 
-filterForm.addEventListener('input', debounce(inputEventHandler, 300));
+filterForm.addEventListener('submit', inputEventHandler);
 
 const updatePieChart = subreddit => {
     const { labels, datasets } = pieChart.data;
@@ -85,4 +88,19 @@ const updateLineChart = ({commentPerMinute, timeElapsed}) => {
 
 socket.on('commentCounter', data => {
     updateLineChart(data);
+});
+
+const sidebar = document.getElementById("sidebar");
+let sidebarShown = false;
+const toggleSidebar = () => sidebarShown =! sidebarShown;
+document.querySelector('#chart-btn').addEventListener('click', () => {
+    toggleSidebar();
+    sidebar.style.width = "100%";
+});
+
+sidebar.addEventListener('click', () => {
+    if (sidebarShown) {
+        toggleSidebar();
+        sidebar.style.width = "0";
+    }
 });

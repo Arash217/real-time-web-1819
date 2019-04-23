@@ -23,11 +23,11 @@ nav {
     justify-content: center;
     background-color: rgb(var(--white));
     padding: 0.6em 0.5em;
-    grid-template-columns: 50% auto;
+    grid-template-columns: 25% 50% 25%;
     grid-column-gap: 1em;
 }
 
-.login-btn {
+.btn {
     text-align: center;
     background-color: transparent;
     color: rgb(0, 121, 211);
@@ -39,6 +39,25 @@ nav {
     text-decoration: none;
     padding: 3px 16px;
     border-color: rgb(0, 121, 211);
+    width: 5em;
+}
+
+#chart-btn {
+    margin-left: 2em;
+    width: 2.5em;
+    height: 2.5em;
+    background-image: url("/images/line-chart.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    background-size: 80%;
+    outline: none;
+    cursor: pointer;
+}
+
+#chart-btn:hover {
+    background-color: rgb(var(--grey));
 }
 
 .search-input {
@@ -52,7 +71,7 @@ nav {
     border-style: solid;
     border-color: rgb(237, 239, 241);
     border-image: initial;
-    padding: 0px 16px 0px 16px;
+    padding: 0 16px 0 16px;
 }
 
 .search-input:hover {
@@ -64,22 +83,60 @@ nav {
 }
 
 .main-container {
-    display: grid;
-    grid-template-columns: 60% auto;
+    display: flex;
     margin: 1em;
+    justify-content: center;
 }
 
 #comments {
-    max-height: 800px;
-    background-color: rgb(var(--white));
-    overflow-y: scroll;
-    word-break: break-all;
+
 }
 
 .comment {
     padding: 1em;
+    margin: 1em;
+    border-radius: 5px;
+    background-color: rgb(var(--white));
+    word-break: break-word;
+    max-width: 800px;
+    color: #000;
+    font-size: 14px;
+}
+
+.comment-permalink {
+    text-decoration: none;
+}
+
+.comment-subreddit {
+    font-weight: bold;
+}
+
+.comment-info {
+    padding-bottom: 1em;
 }
 
 .stats-container {
+    width: 50%;
+    background-color: white;
+}
 
+#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.2s;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.highlight {
+    background: rgba(var(--red), 0.7);
+}
+
+.no-search-message {
+    font-size: 14px;
+    color: rgb(28, 28, 28);
 }

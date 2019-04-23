@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1d3e53"/>
     <meta name="Description" content="An overview of all countries">
@@ -10,22 +10,28 @@
 </head>
 <body>
 <main>
-    <nav>
-        <form id="filter-form">
-            <input type="text" name="filter" id="filter" class="search-input" placeholder="Search comments" autocomplete="off">
-        </form>
-        <a href="/login" class="login-btn">Login</a>
-    </nav>
-    <section class="main-container">
-        <section id="comments"></section>
+    <div id="sidebar">
         <section class="stats-container">
             <canvas id="line-chart"></canvas>
             <canvas id="pie-chart"></canvas>
+        </section>
+    </div>
+    <nav>
+        <button id="chart-btn"></button>
+        <form id="filter-form">
+            <input type="text" name="filter" id="filter" class="search-input" placeholder="Search comments" autocomplete="off">
+        </form>
+        <a href="/login" class="btn">Login</a>
+    </nav>
+    <section class="main-container">
+        <section id="comments">
+            <span class="no-search-message">No search, yet...</span>
         </section>
     </section>
 </main>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chart.bundle.min.js"></script>
+<script src="/js/slideout.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

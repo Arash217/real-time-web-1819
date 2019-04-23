@@ -56,11 +56,12 @@ const socketHandler = client => {
 
     const eventHandler = e => {
         const comment = JSON.parse(e.data);
+        const { filterQuery } = client;
 
-        if (client.filterQuery){
-            if (comment.body && comment.body.includes(client.filterQuery)){
-                // console.log(comment);
-                // console.log(clients.length);
+        if (filterQuery){
+            const { body } = comment;
+            if (body && body.includes(filterQuery)){
+                comment.body = body.replace(new RegExp(filterQuery, 'g'), `<span class="highlight">${filterQuery}</span>`);
                 commentCounter.increment();
                 client.emit('comment', {
                     commentNode: getCommentNode(comment),
