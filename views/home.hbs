@@ -9,19 +9,30 @@
     <link rel="stylesheet" type="text/css" href="/css/chart.min.css">
 </head>
 <body>
-<main>
-    <div id="sidebar">
-        <section class="stats-container">
-            <canvas id="line-chart"></canvas>
-            <canvas id="pie-chart"></canvas>
-        </section>
+
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-1-title">
+                    Comments statistics
+                </h2>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+            </header>
+            <main class="modal__content" id="modal-1-content">
+                <canvas id="line-chart"></canvas>
+                <canvas id="pie-chart"></canvas>
+            </main>
+        </div>
     </div>
+</div>
+<main>
     <nav>
-        <button id="chart-btn"></button>
         <form id="filter-form">
             <input type="text" name="filter" id="filter" class="search-input" placeholder="Search comments" autocomplete="off">
         </form>
-        <a href="/login" class="btn">Login</a>
+        <button id="chart-btn" data-micromodal-trigger="modal-1"></button>
+        <a href="/login" class="btn" >Login</a>
     </nav>
     <section class="main-container">
         <section id="comments">
@@ -31,7 +42,7 @@
 </main>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chart.bundle.min.js"></script>
-<script src="/js/slideout.min.js"></script>
+<script src="/js/micromodal.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

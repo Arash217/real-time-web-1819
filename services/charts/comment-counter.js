@@ -31,6 +31,14 @@ class CommentCounter {
         clearInterval(this.interval);
     }
 
+    reset() {
+        this.count = 0;
+        if (this.startTime) {
+            this.clear();
+            this.startTime = null;
+        }
+    }
+
     static round(number, precision) {
         precision = precision || 0;
         return parseFloat(parseFloat(number).toFixed(precision));

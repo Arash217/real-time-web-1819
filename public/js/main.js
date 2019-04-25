@@ -1,4 +1,5 @@
 const socket = io();
+MicroModal.init();
 
 const filterForm = document.getElementById('filter-form');
 const comments = document.getElementById('comments');
@@ -38,15 +39,41 @@ const pieChart = new Chart(pieCtx, {
     }
 });
 
+const removeNode = selector => {
+    if (document.contains(document.querySelector(selector))) {
+        document.querySelector(selector).remove();
+    }
+};
+
 const removeChildNodes = parent => {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 };
 
+const loader = `<div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>`;
+
+const addLoader = () => {
+    comments.insertAdjacentHTML('afterbegin', loader);
+};
+
+const resetCharts = () => {
+    lineChart.data.labels = [];
+    lineChart.data.datasets[0].data = [];
+    lineChart.update();
+};
+
 const inputEventHandler = e => {
     e.preventDefault();
     removeChildNodes(comments);
+    addLoader();
+    resetCharts();
     const filterFormData = new FormData(filterForm);
     socket.emit('filter', filterFormData.get('filter'));
 };
@@ -56,7 +83,6 @@ filterForm.addEventListener('submit', inputEventHandler);
 const updatePieChart = subreddit => {
     const { labels, datasets } = pieChart.data;
     const index = labels.indexOf(subreddit);
-
     if (index === -1) {
         labels.push(subreddit);
         datasets[0].data.push(1);
@@ -67,9 +93,12 @@ const updatePieChart = subreddit => {
     pieChart.update();
 };
 
+let firstEmit = false;
 socket.on('comment', comment => {
     const { childNodes } = comments;
     const childNodesLength = childNodes.length;
+
+    removeNode('.spinner');
 
     if (childNodesLength >= 25) {
         const lastCommentNode = childNodes[childNodesLength - 1];
@@ -96,19 +125,4 @@ const updateLineChart = ({commentPerMinute, timeElapsed}) => {
 
 socket.on('commentCounter', data => {
     updateLineChart(data);
-});
-
-const sidebar = document.getElementById("sidebar");
-let sidebarShown = false;
-const toggleSidebar = () => sidebarShown =! sidebarShown;
-document.querySelector('#chart-btn').addEventListener('click', () => {
-    toggleSidebar();
-    sidebar.style.width = "100%";
-});
-
-sidebar.addEventListener('click', () => {
-    if (sidebarShown) {
-        toggleSidebar();
-        sidebar.style.width = "0";
-    }
 });

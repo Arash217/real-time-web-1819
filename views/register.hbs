@@ -5,31 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1d3e53"/>
     <meta name="Description" content="An overview of all countries">
-    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
 <main>
-    <form action="/register" method="post">
+    <form class="register-form" action="/register" method="post">
         <div class="container">
-            <h1>Register</h1>
-            <hr>
+            <h1 class="title">Register</h1>
 
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required value="{{body.username}}">
+            <div class="input-container">
+                <input type="text" placeholder="Username" name="username" required value="{{body.username}}"  class="input">
+            </div>
 
             {{#if (equals error.path 'username')}}
-                <p>{{error.message}}</p>
+                <p class="error-message">{{error.message}}</p>
             {{/if}}
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <div class="input-container">
+                <input type="password" placeholder="Password" name="password" required class="input">
+            </div>
 
             {{#if (equals error.path 'password')}}
-                <p>{{error.message}}</p>
+                <p class="error-message">{{error.message}}</p>
             {{/if}}
 
-            <hr>
-            <button type="submit" class="registerbtn">Register</button>
+            <button type="submit" class="registerbtn btn">Register</button>
         </div>
 
         <div class="container signin">

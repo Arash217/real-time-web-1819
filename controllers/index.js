@@ -16,7 +16,7 @@ const registerUser = async ctx => {
         const user = new User(body);
         await user.save();
         ctx.login(user);
-        ctx.redirect('/dashboard');
+        ctx.redirect('/');
     } catch (error) {
         ctx.status = 400;
         await ctx.render('register', {
@@ -33,7 +33,7 @@ const loginUser = async ctx => {
     return passport.authenticate('local', async (error, user) => {
         if (user) {
             ctx.login(user);
-            return ctx.redirect('/dashboard');
+            return ctx.redirect('/');
         }
         ctx.status = 400;
         await ctx.render('login', {
@@ -41,10 +41,6 @@ const loginUser = async ctx => {
             error,
         });
     })(ctx);
-};
-
-const dashboardPage = async ctx => {
-    ctx.body = 'lol2';
 };
 
 const clients = [];
@@ -83,6 +79,7 @@ const socketHandler = client => {
     });
 
     client.on('filter', data => {
+        commentCounter.reset();
         client.filterQuery = data;
     });
 };
@@ -92,7 +89,6 @@ module.exports = {
     registerUser,
     loginPage,
     loginUser,
-    dashboardPage,
     homePage,
     socketHandler,
 };
