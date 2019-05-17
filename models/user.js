@@ -11,6 +11,10 @@ const userSchema = new Schema({
     password: {
         type: String,
     },
+
+    comments: {
+        type: Array
+    }
 });
 
 userSchema.pre('save', async function () {

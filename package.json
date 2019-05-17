@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^3.0.5",
+    "cookie": "^0.3.1",
     "dotenv": "^7.0.0",
     "eventsource": "^1.0.7",
     "handlebars": "^4.1.2",

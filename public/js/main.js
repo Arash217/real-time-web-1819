@@ -126,3 +126,8 @@ const updateLineChart = ({commentPerMinute, timeElapsed}) => {
 socket.on('commentCounter', data => {
     updateLineChart(data);
 });
+
+const logout = () => {
+    console.log('remove');
+    this.session = null;
+};

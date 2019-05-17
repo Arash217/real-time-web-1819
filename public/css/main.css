@@ -29,6 +29,7 @@ nav {
     padding: 0.6em 2em;
     grid-template-columns: 50% auto auto;
     grid-column-gap: 1em;
+    font-size: 14px;
 }
 
 a {
@@ -373,4 +374,15 @@ a {
     font-size: 14px;
     color: rgb(var(--red));
     margin-bottom: 20px;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.user-container .registerbtn {
+    margin-bottom: 0;
+    margin-left: 1em;
 }

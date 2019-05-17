@@ -18,7 +18,10 @@ require('./auth');
 const app = new Koa();
 
 app.keys = ['secret'];
-app.use(session({}, app));
+app.use(session({
+    key: 'session',
+    signed: false
+}, app));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -39,9 +42,21 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 const server = http.createServer(app.callback());
-const io = socketIO(server);
+app.io = socketIO(server, {});
 
 // start server
 const port = process.env.HTTP_PORT || 3000;
 server.listen(port, () => console.log('Server listening on', port));
-io.on('connection', controller.socketHandler);
+
+app.io.use((socket, next) => {
+    let error = null;
+    try {
+        let ctx = app.createContext(socket.request, new http.OutgoingMessage());
+        socket.session = ctx.session;
+    } catch (err) {
+        error = err;
+    }
+    return next(error);
+});
+
+app.io.on('connection', controller.socketHandler);

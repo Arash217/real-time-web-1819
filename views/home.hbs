@@ -32,7 +32,14 @@
             <input type="text" name="filter" id="filter" class="search-input" placeholder="Search comments" autocomplete="off">
         </form>
         <button id="chart-btn" data-micromodal-trigger="modal-1"></button>
-        <a href="/login" class="btn" >Login</a>
+        {{#if username}}
+            <div class="user-container">
+                <span>Welcome, {{username}}</span>
+                <a class="btn registerbtn" href="/logout">Logout</a>
+            </div>
+        {{else}}
+            <a href="/login" class="btn" >Login</a>
+        {{/if}}
     </nav>
     <section class="main-container">
         <section id="comments">
