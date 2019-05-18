@@ -53,20 +53,21 @@ a {
 }
 
 #chart-btn {
-    width: 2em;
-    height: 2em;
+    width: 30px;
+    height: 30px;
     background-image: url("/images/line-chart.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
-    border: none;
-    background-size: 80%;
+    background-size: 22px 22px;
+    padding: 5px;
     outline: none;
     cursor: pointer;
+    border: none;
 }
 
 #chart-btn:hover {
-    background-color: rgb(var(--grey));
+    border: 1px solid rgb(var(--grey));
 }
 
 .search-input {
@@ -171,18 +172,23 @@ a {
 }
 
 @-webkit-keyframes sk-stretchdelay {
-    0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
-    20% { -webkit-transform: scaleY(1.0) }
+    0%, 40%, 100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
 }
 
 @keyframes sk-stretchdelay {
     0%, 40%, 100% {
         transform: scaleY(0.4);
         -webkit-transform: scaleY(0.4);
-    }  20% {
-           transform: scaleY(1.0);
-           -webkit-transform: scaleY(1.0);
-       }
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
 }
 
 .modal__overlay {
@@ -191,7 +197,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -228,13 +234,15 @@ a {
     cursor: pointer;
 }
 
-.modal__header .modal__close:before { content: "\2715"; }
+.modal__header .modal__close:before {
+    content: "\2715";
+}
 
 .modal__content {
     margin-top: 2rem;
     margin-bottom: 2rem;
     line-height: 1.5;
-    color: rgba(0,0,0,.8);
+    color: rgba(0, 0, 0, .8);
 }
 
 .modal__btn {
@@ -244,7 +252,7 @@ a {
     padding-top: .5rem;
     padding-bottom: .5rem;
     background-color: #e6e6e6;
-    color: rgba(0,0,0,.8);
+    color: rgba(0, 0, 0, .8);
     border-radius: .25rem;
     border-style: none;
     border-width: 0;
@@ -262,7 +270,7 @@ a {
     transform: translateZ(0);
     transition: -webkit-transform .25s ease-out;
     transition: transform .25s ease-out;
-    transition: transform .25s ease-out,-webkit-transform .25s ease-out;
+    transition: transform .25s ease-out, -webkit-transform .25s ease-out;
 }
 
 .modal__btn:focus, .modal__btn:hover {
@@ -279,23 +287,39 @@ a {
   Demo Animation Style
 \**************************/
 @keyframes mmfadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes mmfadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes mmslideIn {
-    from { transform: translateY(15%); }
-    to { transform: translateY(0); }
+    from {
+        transform: translateY(15%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 @keyframes mmslideOut {
-    from { transform: translateY(0); }
-    to { transform: translateY(-10%); }
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10%);
+    }
 }
 
 .micromodal-slide {
@@ -376,13 +400,88 @@ a {
     margin-bottom: 20px;
 }
 
-.user-container {
-    display: flex;
-    align-items: center;
-    align-content: center;
-}
-
 .user-container .registerbtn {
     margin-bottom: 0;
     margin-left: 1em;
+}
+
+.dropdown {
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 14px;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    border: 1px solid transparent;
+    min-width: 180px;
+}
+
+.dropbtn .arrow {
+    display: inline-block;
+    background-image: url("/images/drop-down-arrow.svg");
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+}
+
+.dropbtn:hover {
+    border: 1px solid rgb(var(--grey));
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 180px;
+    z-index: 1;
+    background-color: white;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: rgb(var(--blue));
+    color: white;
+}
+
+.show {
+    display: block;
+}
+
+.user-search-info {
+    margin: 1em;
+    font-weight: bold;
+}
+
+.custom-nav {
+    display: block;
+    background-color: white;
+    font-size: 16px;
+}
+
+.custom-nav a {
+    color: black;
+}
+
+.back-arrow {
+    display: inline-block;
+    background-image: url("/images/drop-down-arrow.svg");
+    transform: rotate(90deg);
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
 }

@@ -33,9 +33,15 @@
         </form>
         <button id="chart-btn" data-micromodal-trigger="modal-1"></button>
         {{#if username}}
-            <div class="user-container">
-                <span>Welcome, {{username}}</span>
-                <a class="btn registerbtn" href="/logout">Logout</a>
+            <div class="user-container dropdown">
+                <button id="dropdown-btn" class="dropbtn">
+                    Welcome, {{username}}
+                    <span class="arrow"></span>
+                </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="/history">Search history</a>
+                    <a href="/logout">Logout</a>
+                </div>
             </div>
         {{else}}
             <a href="/login" class="btn" >Login</a>

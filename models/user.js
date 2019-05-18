@@ -10,10 +10,6 @@ const userSchema = new Schema({
 
     password: {
         type: String,
-    },
-
-    comments: {
-        type: Array
     }
 });
 

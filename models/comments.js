@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
 
-const { Schema, model } = mongoose;
+const {Schema, model} = mongoose;
 
-const commentSchema = new Schema({
+const commentsSchema = new Schema({
     userId: {
         type: String,
+    },
+
+    search: {
+        type: String
+    },
+
+    searchDateTime: {
+        type: String
     },
 
     comments: {
@@ -12,4 +20,4 @@ const commentSchema = new Schema({
     }
 });
 
-module.exports = model('Comments', commentSchema);
+module.exports = model('Comments', commentsSchema);

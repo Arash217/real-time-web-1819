@@ -3,8 +3,10 @@ const User = require('../models/user');
 const Comments = require('../models/comments');
 const userValidator = require('../services/validation/user');
 const redditStream = require('../services/reddit/stream');
-const {getCommentNode} = require('../services/views/index');
+const {getCommentNode} = require('../services/views/comment');
+const {highlightKeyword} = require('../services/views/highlight');
 const CommentCounter = require('../services/charts/comment-counter');
+const {saveComments, updateComments} = require('../services/database/comments');
 
 const homePage = async ctx => ctx.render('home', {
     username: ctx.state.user ? ctx.state.user.username : null
@@ -54,39 +56,31 @@ const logoutUser = async ctx => {
     ctx.redirect('/');
 };
 
-const commentsPage = async ctx => {
-    if (ctx.isUnauthenticated()){
+const historyPage = async ctx => {
+    if (ctx.isUnauthenticated()) {
         return ctx.redirect('/login');
     }
 
-    const comments = await Comments.find({userId: ctx.state.user._id});
+    const userComments = await Comments.find({userId: ctx.state.user._id}).sort({'searchDateTime': 'desc'});
 
-    await ctx.render('comments', {
-        comments
+    await ctx.render('history', {
+        userComments
     });
 };
 
-const clients = [];
-
 const socketHandler = async client => {
-    clients.push(client);
-
     const commentCounter = new CommentCounter(client);
     const userId = client.session.passport && client.session.passport.user;
+    let previousFilterQuery = '';
 
-    if (userId){
-        const userComments = new Comments({userId});
-        userComments.save();
-    }
-
-    const eventHandler = async e => {
+    const onComment = e => {
         const comment = JSON.parse(e.data);
         const {filterQuery} = client;
 
         if (filterQuery) {
             const {body} = comment;
             if (body && body.includes(filterQuery)) {
-                comment.body = body.replace(new RegExp(filterQuery, 'g'), `<span class="highlight">${filterQuery}</span>`);
+                comment.body = highlightKeyword(body, filterQuery);
                 commentCounter.increment();
                 client.emit('comment', {
                     commentNode: getCommentNode(comment),
@@ -94,23 +88,22 @@ const socketHandler = async client => {
                         subreddit: comment.subreddit_name_prefixed
                     }
                 });
-
                 if (userId) {
-                    await Comments.update({userId}, {
-                        "$push": { "comments": comment.body }
-                    }, {
-                        multi: true
-                    });
+                    if (previousFilterQuery !== filterQuery) {
+                        saveComments(userId, client.filterQuery);
+                    }
+
+                    updateComments(comment);
                 }
+                previousFilterQuery = filterQuery;
             }
         }
     };
 
-    redditStream.addEventListener('rc', eventHandler);
+    redditStream.addEventListener('rc', onComment);
 
     client.on('disconnect', () => {
-        clients.splice(clients.indexOf(client), 1);
-        redditStream.removeEventListener('rc', eventHandler);
+        redditStream.removeEventListener('rc', onComment);
         commentCounter.clear();
         delete (commentCounter);
     });
@@ -128,6 +121,6 @@ module.exports = {
     loginUser,
     logoutUser,
     homePage,
-    commentsPage,
+    historyPage,
     socketHandler,
 };
