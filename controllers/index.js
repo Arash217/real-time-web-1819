@@ -61,7 +61,7 @@ const historyPage = async ctx => {
         return ctx.redirect('/login');
     }
 
-    const userComments = await Comments.find({userId: ctx.state.user._id}).sort({'searchDateTime': 'desc'});
+    const userComments = await Comments.find({userId: ctx.state.user._id}).sort({'createdAt': 'desc'});
 
     await ctx.render('history', {
         userComments

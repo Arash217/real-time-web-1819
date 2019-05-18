@@ -4,7 +4,6 @@ MicroModal.init();
 const filterForm = document.getElementById('filter-form');
 const comments = document.getElementById('comments');
 const lineCtx = document.getElementById('line-chart');
-const pieCtx = document.getElementById('pie-chart');
 
 const lineChart = new Chart(lineCtx, {
     type: 'line',
@@ -23,19 +22,6 @@ const lineChart = new Chart(lineCtx, {
             }
         },
         responsive: true,
-    }
-});
-
-const pieChart = new Chart(pieCtx, {
-    type: 'horizontalBar',
-    options: {
-        maintainAspectRatio: false,
-        responsive: true,
-    },
-    data: {
-        datasets: [{
-            data: []
-        }],
     }
 });
 
@@ -80,20 +66,6 @@ const inputEventHandler = e => {
 
 filterForm.addEventListener('submit', inputEventHandler);
 
-const updatePieChart = subreddit => {
-    const { labels, datasets } = pieChart.data;
-    const index = labels.indexOf(subreddit);
-    if (index === -1) {
-        labels.push(subreddit);
-        datasets[0].data.push(1);
-    } else {
-        datasets[0].data[index]++;
-    }
-
-    pieChart.update();
-};
-
-let firstEmit = false;
 socket.on('comment', comment => {
     const { childNodes } = comments;
     const childNodesLength = childNodes.length;
@@ -106,7 +78,6 @@ socket.on('comment', comment => {
     }
 
     comments.insertAdjacentHTML('afterbegin', comment.commentNode);
-    updatePieChart(comment.commentData.subreddit);
 });
 
 const updateLineChart = ({commentPerMinute, timeElapsed}) => {
@@ -126,11 +97,6 @@ const updateLineChart = ({commentPerMinute, timeElapsed}) => {
 socket.on('commentCounter', data => {
     updateLineChart(data);
 });
-
-const logout = () => {
-    console.log('remove');
-    this.session = null;
-};
 
 const dropdown = document.getElementById('dropdown-btn');
 dropdown.addEventListener('click', () => {

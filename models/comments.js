@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const {Schema, model} = mongoose;
 
@@ -17,6 +18,14 @@ const commentsSchema = new Schema({
 
     comments: {
         type: Array
+    }
+}, {
+    timestamps: true
+});
+
+commentsSchema.pre('save', async function () {
+    if (!this.searchDateTime){
+        this.searchDateTime = moment().format('DD-MM-YYYY - HH:mm');
     }
 });
 
