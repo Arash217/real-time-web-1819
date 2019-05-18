@@ -88,6 +88,7 @@ const socketHandler = async client => {
                         subreddit: comment.subreddit_name_prefixed
                     }
                 });
+
                 if (userId) {
                     if (previousFilterQuery !== filterQuery) {
                         saveComments(userId, client.filterQuery);
