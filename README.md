@@ -2,3 +2,4 @@
 
 ## Summary
 A webapp using websockets to filter realtime Reddit comments.
+![App](../master/docs/images/app.png)
