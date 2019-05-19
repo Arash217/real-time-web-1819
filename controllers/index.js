@@ -80,30 +80,34 @@ const respond = (io, client) => {
     let previousFilterQuery = '';
 
     const onComment = e => {
-        const comment = JSON.parse(e.data);
-        const {filterQuery} = client;
+        try {
+            const comment = JSON.parse(e.data);
+            const {filterQuery} = client;
 
-        if (filterQuery) {
-            const {body} = comment;
-            if (body && body.includes(filterQuery)) {
-                comment.body = highlightKeyword(body, filterQuery);
-                commentCounter.increment();
-                client.emit('comment', {
-                    commentNode: getCommentNode(comment),
-                    commentData: {
-                        subreddit: comment.subreddit_name_prefixed
+            if (filterQuery) {
+                const {body} = comment;
+                if (body && body.includes(filterQuery)) {
+                    comment.body = highlightKeyword(body, filterQuery);
+                    commentCounter.increment();
+                    client.emit('comment', {
+                        commentNode: getCommentNode(comment),
+                        commentData: {
+                            subreddit: comment.subreddit_name_prefixed
+                        }
+                    });
+
+                    if (userId) {
+                        if (previousFilterQuery !== filterQuery) {
+                            saveComments(userId, client.filterQuery);
+                        }
+
+                        updateComments(comment);
                     }
-                });
-
-                if (userId) {
-                    if (previousFilterQuery !== filterQuery) {
-                        saveComments(userId, client.filterQuery);
-                    }
-
-                    updateComments(comment);
+                    previousFilterQuery = filterQuery;
                 }
-                previousFilterQuery = filterQuery;
             }
+        } catch (e) {
+            console.log(e);
         }
     };
 
