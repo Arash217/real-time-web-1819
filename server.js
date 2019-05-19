@@ -11,7 +11,6 @@ const http = require('http');
 
 require('./db/mongoose');
 const router = require('./routes');
-// const middlewares = require('./middlewares');
 const controller = require('./controllers');
 require('./auth');
 
@@ -37,7 +36,6 @@ app.use(hbs.middleware({
     partialsPath: path.join(__dirname, 'views/partials'),
 }));
 
-// app.use(middlewares);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
