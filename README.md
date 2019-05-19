@@ -19,3 +19,14 @@ Start the server
 ```
 npm start
 ```
+
+### Database config
+create config/db.json with the following format:
+{
+  "username": <username>,
+  "password": <password>,
+  "host": <host>,
+  "port": <host-port>,
+  "database": <database-name>
+}
+
