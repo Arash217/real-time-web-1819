@@ -7,6 +7,7 @@ const {getCommentNode} = require('../services/views/comment');
 const {highlightKeyword} = require('../services/views/highlight');
 const CommentCounter = require('../services/charts/comment-counter');
 const {saveComments, updateComments} = require('../services/database/comments');
+const {getSearches, incrementSearch} = require('../services/database/searches');
 
 const homePage = async ctx => ctx.render('home', {
     username: ctx.state.user ? ctx.state.user.username : null
@@ -68,7 +69,12 @@ const historyPage = async ctx => {
     });
 };
 
-const socketHandler = async client => {
+const handleSearchEmit = async (target, data) => {
+    target.emit('search', await data);
+};
+
+const respond = (io, client) => {
+    handleSearchEmit(client, getSearches());
     const commentCounter = new CommentCounter(client);
     const userId = client.session.passport && client.session.passport.user;
     let previousFilterQuery = '';
@@ -109,9 +115,10 @@ const socketHandler = async client => {
         delete (commentCounter);
     });
 
-    client.on('filter', data => {
+    client.on('filter', async data => {
         commentCounter.reset();
         client.filterQuery = data;
+        handleSearchEmit(io, incrementSearch(data));
     });
 };
 
@@ -123,5 +130,5 @@ module.exports = {
     logoutUser,
     homePage,
     historyPage,
-    socketHandler,
+    respond
 };

@@ -12,8 +12,8 @@ const saveComments = async (userId, search) => {
 
 const updateComments = async ({permalink, subreddit_name_prefixed, author, body}) => {
     await Comments.update({_id: userComments._id}, {
-        "$push": {
-            "comments": {
+        $push: {
+            comments: {
                 $each: [{
                     permalink,
                     subreddit_name_prefixed,

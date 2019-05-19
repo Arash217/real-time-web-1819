@@ -4,6 +4,7 @@ MicroModal.init();
 const filterForm = document.getElementById('filter-form');
 const comments = document.getElementById('comments');
 const lineCtx = document.getElementById('line-chart');
+const grapCtx = document.getElementById('graph-chart');
 
 const lineChart = new Chart(lineCtx, {
     type: 'line',
@@ -22,6 +23,35 @@ const lineChart = new Chart(lineCtx, {
             }
         },
         responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+const graphChart = new Chart(grapCtx, {
+    type: 'horizontalBar',
+    options: {
+        responsive: true,
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    },
+    data: {
+        datasets: [{
+            data: [],
+            label: 'Top 10 searches all time',
+            borderColor: 'rgba(82, 150, 221, 0.5)',
+            backgroundColor: 'rgba(82, 150, 221, 0.5)',
+        }],
     }
 });
 
@@ -80,7 +110,7 @@ socket.on('comment', comment => {
     comments.insertAdjacentHTML('afterbegin', comment.commentNode);
 });
 
-const updateLineChart = ({commentPerMinute, timeElapsed}) => {
+const updateLineChart = async ({commentPerMinute, timeElapsed}) => {
     const { datasets } = lineChart.data;
 
     if (datasets[0].data.length >= 30){
@@ -98,17 +128,44 @@ socket.on('commentCounter', data => {
     updateLineChart(data);
 });
 
-const dropdown = document.getElementById('dropdown-btn');
-dropdown.addEventListener('click', () => {
-    document.getElementById("myDropdown").classList.toggle("show");
-});
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-    if (!e.target.matches('.dropbtn')) {
-        const myDropdown = document.getElementById("myDropdown");
-        if (myDropdown.classList.contains('show')) {
-            myDropdown.classList.remove('show');
-        }
+const clearArray = (array) => {
+    while(array.length > 0) {
+        array.pop();
     }
 };
+
+const updateGraphChart = async searches => {
+    let { labels, datasets } = graphChart.data;
+
+    clearArray(labels);
+    clearArray(datasets[0].data);
+
+    searches.forEach(search => {
+        labels.push(search.search);
+        datasets[0].data.push(search.count);
+    });
+
+    graphChart.update();
+};
+
+socket.on('search', data => {
+    updateGraphChart(data);
+});
+
+const dropdown = document.getElementById('dropdown-btn');
+
+if (dropdown){
+    dropdown.addEventListener('click', () => {
+        document.getElementById("myDropdown").classList.toggle("show");
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            const myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    };
+}

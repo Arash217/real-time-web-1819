@@ -59,4 +59,4 @@ app.io.use((socket, next) => {
     return next(error);
 });
 
-app.io.on('connection', controller.socketHandler);
+app.io.on('connection', client => controller.respond(app.io, client));
