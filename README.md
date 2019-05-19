@@ -32,3 +32,12 @@ create config/db.json with the following format:
 }
 ```
 
+## Concept
+This webapplication filters a live stream of Reddit comments and displays it to the user.
+
+Features of the app:
+- User can filter comments by using the input field in the webapp
+- Comments statistics to see the comments per minute for a search, and top 10 searches all time (of all users)
+- Login system to keep track of a user's search history
+
+
