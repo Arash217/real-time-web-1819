@@ -20,14 +20,15 @@ Start the server
 npm start
 ```
 
-### Database config
+### Mongo database config
 create config/db.json with the following format:
 ```
 {
-  "username": <username>,
-  "password": <password>,
+  "username": <database-username>,
+  "password": <database-password>,
   "host": <host>,
   "port": <host-port>,
   "database": <database-name>
 }
 ```
+
