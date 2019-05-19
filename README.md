@@ -44,3 +44,10 @@ Features of the app:
 The app uses [Reddit SSE Stream](https://github.com/pushshift/reddit_sse_stream) to get a live feed of near real-time Reddit data by using server-sent events.
 
 Note: this isn't the official Reddit API.
+
+## Todo
+- [ ] Client-side form validation for register and login forms
+- [ ] Handling downtime
+- [ ] More error handling
+- [ ] Better UX and UI
+- [ ] Add support for filtering by regex
