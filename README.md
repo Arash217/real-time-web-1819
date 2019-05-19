@@ -42,4 +42,5 @@ Features of the app:
 
 ## API
 The app uses [Reddit SSE Stream](https://github.com/pushshift/reddit_sse_stream) to get a live feed of real-time Reddit data.
+
 Note: This isn't the official Reddit API.
