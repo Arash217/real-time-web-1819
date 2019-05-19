@@ -87,17 +87,21 @@ const resetCharts = () => {
 
 const inputEventHandler = e => {
     e.preventDefault();
-    removeChildNodes(comments);
-    addLoader();
-    resetCharts();
     const filterFormData = new FormData(filterForm);
-    socket.emit('filter', filterFormData.get('filter'));
+    const filter = filterFormData.get('filter');
+
+    if (filter && filter.trim() !== '') {
+        removeChildNodes(comments);
+        addLoader();
+        resetCharts();
+        socket.emit('filter', filter);
+    }
 };
 
 filterForm.addEventListener('submit', inputEventHandler);
 
 socket.on('comment', comment => {
-    const { childNodes } = comments;
+    const {childNodes} = comments;
     const childNodesLength = childNodes.length;
 
     removeNode('.spinner');
@@ -111,9 +115,9 @@ socket.on('comment', comment => {
 });
 
 const updateLineChart = async ({commentPerMinute, timeElapsed}) => {
-    const { datasets } = lineChart.data;
+    const {datasets} = lineChart.data;
 
-    if (datasets[0].data.length >= 30){
+    if (datasets[0].data.length >= 30) {
         lineChart.data.labels.shift();
         datasets[0].data.shift();
     }
@@ -129,13 +133,13 @@ socket.on('commentCounter', data => {
 });
 
 const clearArray = (array) => {
-    while(array.length > 0) {
+    while (array.length > 0) {
         array.pop();
     }
 };
 
 const updateGraphChart = async searches => {
-    let { labels, datasets } = graphChart.data;
+    let {labels, datasets} = graphChart.data;
 
     clearArray(labels);
     clearArray(datasets[0].data);
@@ -154,13 +158,13 @@ socket.on('search', data => {
 
 const dropdown = document.getElementById('dropdown-btn');
 
-if (dropdown){
+if (dropdown) {
     dropdown.addEventListener('click', () => {
         document.getElementById("myDropdown").classList.toggle("show");
     });
 
     // Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
+    window.onclick = function (e) {
         if (!e.target.matches('.dropbtn')) {
             const myDropdown = document.getElementById("myDropdown");
             if (myDropdown.classList.contains('show')) {
