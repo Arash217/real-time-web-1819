@@ -40,4 +40,6 @@ Features of the app:
 - Comments statistics to see the comments per minute for a search, and top 10 searches all time (of all users)
 - Login system to keep track of a user's search history
 
-
+## API
+The app uses [Reddit SSE Stream](https://github.com/pushshift/reddit_sse_stream) to get a live feed of real-time Reddit data.
+Note: This isn't the official Reddit API.
