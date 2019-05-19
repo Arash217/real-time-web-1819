@@ -22,6 +22,7 @@ npm start
 
 ### Database config
 create config/db.json with the following format:
+```
 {
   "username": <username>,
   "password": <password>,
@@ -29,4 +30,4 @@ create config/db.json with the following format:
   "port": <host-port>,
   "database": <database-name>
 }
-
+```
