@@ -78,6 +78,20 @@ Comment example that is pushed by the API to the server.
 ### Client data model
 
 <details>
+<summary>Line chart data</summary>
+  
+```
+  {
+      labels:[1, 2, 3, 4, 5]
+      datasets: [60, 55, 54, 52, 50]
+  }
+```
+
+The data that is displayed by the line chart for the comments per minute. 
+Labels are time elapsed in seconds and datasets the respective comments per minute.
+</details>
+
+<details>
 <summary>Graph chart data</summary>
   
 ```
@@ -88,6 +102,7 @@ Comment example that is pushed by the API to the server.
 ```
 
 The data that is displayed by the graph chart for the top 10 searches all time.
+Labels are the search keywords and datasets are the respective amount of times searched for.
 </details>
 
 ### Server data model
