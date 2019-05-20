@@ -95,10 +95,10 @@ Note: this isn't the official Reddit API.
             "permalink" : "/r/PersonalFinanceCanada/comments/bpx8sj/canadian_scholarship_megathread_2019/eo1sqtp/",
             "subreddit_name_prefixed" : "r/PersonalFinanceCanada",
             "author" : "Tomlinsoi",
-            "body" : "ScholarshipsCanada really seems to have gone downhill."
+            "body" : "ScholarshipsCanada really seems to have gone downhill.  I used it in my undergrad almost a decade ago and there were lots of great options and useful links.  Tried using it in my grad program last year and the only scholarships that ever popped up were either US based, expired, or just survey site links.  \n\nIt would be nice to have a more reliable central lo<span class=\"highlight\">cat</span>ion for them all."
         }
     ],
-    "userId" : "<user-id>",
+    "userId" : "5cdf03bf81abc031b8bb658b",
     "search" : "cat",
     "createdAt" : ISODate("2019-05-18T18:58:55.162Z"),
     "updatedAt" : ISODate("2019-05-18T18:58:56.165Z"),
@@ -106,11 +106,11 @@ Note: this isn't the official Reddit API.
 }
 ```
 
-#### Users
+#### Searches
 ```
 {
-    "username" : "<username>",
-    "password" : "<hashed-password>",
+    "count" : 34,
+    "search" : "dog"
 }
 ```
 
