@@ -61,6 +61,19 @@ Note: this isn't the official Reddit API.
 ### Client data model
 
 ### Server data model
+<details>
+<summary>CommentCounter</summary>
+  
+```
+{  
+    commentPerMinute: CommentCounter.round(commentPerMinute, 1),
+    timeElapsed: Math.round(timeElapsed / 1000),
+}
+```
+
+The server keeps track of the amount of times a comment has been found by the user's search keyword. 
+The data is used in the client to display the predicted comments per minute.
+</details>
 
 ### Reddit SSE stream data model
 
