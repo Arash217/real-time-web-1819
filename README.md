@@ -84,7 +84,9 @@ Note: this isn't the official Reddit API.
 ```
 </details>
 
-#### Comments
+<details>
+<summary>Comments</summary>
+  
 ```
 {
     "comments" : [ 
@@ -108,14 +110,20 @@ Note: this isn't the official Reddit API.
     "searchDateTime" : "18-05-2019 - 20:58",
 }
 ```
+</details>
 
-#### Searches
+<details>
+<summary>Searches</summary>
+  
 ```
 {
     "count" : 34,
     "search" : "dog"
 }
 ```
+</details>
+
+
 
 ## Todo
 - [ ] Client-side form validation for register and login forms
