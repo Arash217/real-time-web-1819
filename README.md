@@ -62,6 +62,10 @@ Note: this isn't the official Reddit API.
 ### Server data model
 
 ### Reddit SSE stream data model
+
+<details>
+<summary>Comment</summary>
+  
 ```
 {  
    "body":"Horrible! But what're the names of buildings involved?",
@@ -70,6 +74,7 @@ Note: this isn't the official Reddit API.
    "author":"randomUser5"
 }
 ```
+</details>
 
 ### MongoDB data model
 
