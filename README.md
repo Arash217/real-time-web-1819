@@ -73,9 +73,9 @@ Note: this isn't the official Reddit API.
 
 ### MongoDB data model
 
-#### Users
 <details>
 <summary>Users</summary>
+  
 ```
 {
     "username" : "<username>",
