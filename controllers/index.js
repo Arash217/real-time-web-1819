@@ -87,7 +87,6 @@ const respond = (io, client) => {
             if (filterQuery) {
                 const {body} = comment;
                 if (body && body.includes(filterQuery)) {
-                    console.log(comment);
                     comment.body = highlightKeyword(body, filterQuery);
                     commentCounter.increment();
                     client.emit('comment', {
