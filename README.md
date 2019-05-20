@@ -56,6 +56,7 @@ The API allows me to filter only the required data, returning the following data
 Note: this isn't the official Reddit API.
 
 ## Data lifecycle
+![Lifecycle](../master/docs/images/data-lifecycle.png)
 
 ### Client data model
 
