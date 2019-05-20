@@ -77,6 +77,19 @@ Comment example that is pushed by the API to the server.
 
 ### Client data model
 
+<details>
+<summary>Graph chart data</summary>
+  
+```
+  {
+      labels:["dog", "cat", "test", "real", "test2", " cat", "do"]
+      datasets: [35,27,18,3,1,1,1]
+  }
+```
+
+The data that is displayed by the graph chart for the top 10 searches all time.
+</details>
+
 ### Server data model
 <details>
 <summary>Comment</summary>
