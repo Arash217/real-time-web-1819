@@ -90,10 +90,7 @@ const respond = (io, client) => {
                     comment.body = highlightKeyword(body, filterQuery);
                     commentCounter.increment();
                     client.emit('comment', {
-                        commentNode: getCommentNode(comment),
-                        commentData: {
-                            subreddit: comment.subreddit_name_prefixed
-                        }
+                        commentNode: getCommentNode(comment)
                     });
 
                     if (userId) {
