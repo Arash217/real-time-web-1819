@@ -96,6 +96,7 @@ Comment example that is pushed by the API to the server.
 }
 ```
 
+The comment data from the Reddit SSE stream is used to create server-side the HTML for the client, so that the client has only to append the HTML to the DOM.
 </details>
 
 <details>
