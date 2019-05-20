@@ -55,6 +55,32 @@ The API allows me to filter only the required data, returning the following data
 
 Note: this isn't the official Reddit API.
 
+## Data lifecycle
+
+### Client data model
+
+### Server data model
+
+### Reddit SSE stream data model
+```
+{  
+   "body":"Horrible! But what're the names of buildings involved?",
+   "permalink":"\/r\/aggies\/comments\/bqqoza\/tamu_transit_employee_arrested_for_hiding_a\/eo71p94\/",
+   "subreddit_name_prefixed":"r\/aggies",
+   "author":"randomUser5"
+}
+```
+
+### Mongo DB data model
+
+#### Users
+```
+{
+    "username" : "<username>",
+    "password" : "<hashed-password>",
+}
+```
+
 ## Todo
 - [ ] Client-side form validation for register and login forms
 - [ ] Handling downtime
