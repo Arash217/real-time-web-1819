@@ -74,6 +74,9 @@ Note: this isn't the official Reddit API.
    "author":"randomUser5"
 }
 ```
+
+  
+Comment example that is pushed by the API to the server.
 </details>
 
 ### MongoDB data model
@@ -87,6 +90,8 @@ Note: this isn't the official Reddit API.
     "password" : "<hashed-password>",
 }
 ```
+
+MongoDB collection to store user accounts.
 </details>
 
 <details>
@@ -115,6 +120,8 @@ Note: this isn't the official Reddit API.
     "searchDateTime" : "18-05-2019 - 20:58",
 }
 ```
+
+MongoDB collection to store the user's search history.
 </details>
 
 <details>
@@ -126,6 +133,8 @@ Note: this isn't the official Reddit API.
     "search" : "dog"
 }
 ```
+
+MongoDB collection to store the top used search keywords. 
 </details>
 
 
