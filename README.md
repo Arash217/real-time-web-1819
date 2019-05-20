@@ -90,6 +90,8 @@ Comment example that is pushed by the API to the server.
     "password" : "<hashed-password>",
 }
 ```
+
+MongoDB collection to store user accounts.
 </details>
 
 <details>
@@ -118,6 +120,8 @@ Comment example that is pushed by the API to the server.
     "searchDateTime" : "18-05-2019 - 20:58",
 }
 ```
+
+MongoDB collection to store the user's search history.
 </details>
 
 <details>
@@ -129,6 +133,8 @@ Comment example that is pushed by the API to the server.
     "search" : "dog"
 }
 ```
+
+MongoDB collection to store the top used search keywords. 
 </details>
 
 
