@@ -44,12 +44,14 @@ Features of the app:
 The app uses [Reddit SSE Stream](https://github.com/pushshift/reddit_sse_stream) to get a live feed of near real-time Reddit data by using server-sent events. The API doesn't require an API key, but does limit the connection to only one per IP.
 
 The API allows me to filter only the data that I need, returning the following data format:
+```
 {  
    "body":"Horrible! But what're the names of buildings involved?",
    "permalink":"\/r\/aggies\/comments\/bqqoza\/tamu_transit_employee_arrested_for_hiding_a\/eo71p94\/",
    "subreddit_name_prefixed":"r\/aggies",
    "author":"randomUser5"
 }
+```
 
 Note: this isn't the official Reddit API.
 
