@@ -77,6 +77,7 @@ Comment example that is pushed by the API to the server.
 
 ### Client data model
 
+### Server data model
 <details>
 <summary>Comment</summary>
   
@@ -97,7 +98,6 @@ Comment example that is pushed by the API to the server.
 
 </details>
 
-### Server data model
 <details>
 <summary>CommentCounter</summary>
   
