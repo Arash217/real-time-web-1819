@@ -66,6 +66,7 @@ Note: this isn't the official Reddit API.
 <details>
 <summary>Comment</summary>
   
+  
 Comment example that is pushed by the API to the server.
   
   
