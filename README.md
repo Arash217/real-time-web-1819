@@ -72,7 +72,6 @@ Note: this isn't the official Reddit API.
 }
 ```
 
-  
 Comment example that is pushed by the API to the server.
 </details>
 
