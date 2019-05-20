@@ -87,6 +87,7 @@ const respond = (io, client) => {
             if (filterQuery) {
                 const {body} = comment;
                 if (body && body.includes(filterQuery)) {
+                    console.log(comment);
                     comment.body = highlightKeyword(body, filterQuery);
                     commentCounter.increment();
                     client.emit('comment', {
@@ -106,9 +107,7 @@ const respond = (io, client) => {
                     previousFilterQuery = filterQuery;
                 }
             }
-        } catch (e) {
-            console.log(e);
-        }
+        } catch (e) {}
     };
 
     redditStream.addEventListener('rc', onComment);
