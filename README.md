@@ -58,25 +58,6 @@ Note: this isn't the official Reddit API.
 ## Data lifecycle
 ![Lifecycle](../master/docs/images/data-lifecycle.png)
 
-### Client data model
-
-### Server data model
-<details>
-<summary>CommentCounter</summary>
-  
-```
-{  
-    commentPerMinute: CommentCounter.round(commentPerMinute, 1),
-    timeElapsed: Math.round(timeElapsed / 1000),
-}
-```
-
-The server keeps track of the amount of times a comment has been found by the user's search keyword. 
-The data is used in the client to display the predicted comments per minute.
-
-(See the CommentCounter class for more details)
-</details>
-
 ### Reddit SSE stream data model
 
 <details>
@@ -93,6 +74,26 @@ The data is used in the client to display the predicted comments per minute.
 
   
 Comment example that is pushed by the API to the server.
+</details>
+
+### Client data model
+
+
+### Server data model
+<details>
+<summary>CommentCounter</summary>
+  
+```
+{  
+    commentPerMinute: CommentCounter.round(commentPerMinute, 1),
+    timeElapsed: Math.round(timeElapsed / 1000),
+}
+```
+
+The server keeps track of the amount of times a comment has been found by the user's search keyword. 
+The data is used in the client to display the predicted comments per minute.
+
+(See the CommentCounter class for more details)
 </details>
 
 ### MongoDB data model
