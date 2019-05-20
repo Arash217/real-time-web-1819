@@ -73,6 +73,8 @@ Note: this isn't the official Reddit API.
 
 The server keeps track of the amount of times a comment has been found by the user's search keyword. 
 The data is used in the client to display the predicted comments per minute.
+
+(See the CommentCounter class for more details)
 </details>
 
 ### Reddit SSE stream data model
