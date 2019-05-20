@@ -19,3 +19,35 @@ Start the server
 ```
 npm start
 ```
+
+### Mongo database config
+create config/db.json with the following format:
+```
+{
+  "username": <database-username>,
+  "password": <database-password>,
+  "host": <host>,
+  "port": <host-port>,
+  "database": <database-name>
+}
+```
+
+## Concept
+This webapplication filters a live stream of Reddit comments and displays it to the user.
+
+Features of the app:
+- User can filter comments by using the input field in the webapp
+- Comments statistics to see the comments per minute for a search, and top 10 searches all time (of all users)
+- Login system to keep track of a user's search history
+
+## API
+The app uses [Reddit SSE Stream](https://github.com/pushshift/reddit_sse_stream) to get a live feed of near real-time Reddit data by using server-sent events.
+
+Note: this isn't the official Reddit API.
+
+## Todo
+- [ ] Client-side form validation for register and login forms
+- [ ] Handling downtime
+- [ ] More error handling
+- [ ] Better UX and UI
+- [ ] Add support for filtering by regex
