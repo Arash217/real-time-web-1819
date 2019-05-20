@@ -77,6 +77,25 @@ Comment example that is pushed by the API to the server.
 
 ### Client data model
 
+<details>
+<summary>Comment</summary>
+  
+```
+{  
+    commentNode: '<a href="https://www.reddit.com/r/dankmemes/comments/bqoin6/stupid_ads/eo7fe54/" target="_blank" class="comment-permalink">
+    <div class="comment">
+        <div class="comment-info">
+            <span class="comment-subreddit">r/dankmemes</span>
+            <span> - </span>
+            <span class="comment-user">Comment by ashleystrange</span>
+        </div>
+        <p>Unless it's a cute <span class="highlight">dog</span>.</p>
+    </div>
+</a>'
+}
+```
+
+</details>
 
 ### Server data model
 <details>
